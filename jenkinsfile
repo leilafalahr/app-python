@@ -16,7 +16,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    docker.withRegistry('https://878343933049.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:amazon')
+                    docker.withRegistry('878343933049.dkr.ecr.us-east-1.amazonaws.com/mi-primera-app', 'ecr:us-east-1:amazon')
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                 }
