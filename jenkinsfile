@@ -4,7 +4,7 @@ pipeline {
         stage('build'){
             steps {
                 script {
-                    app = docker.build("python-app")
+                    app = docker.build("app-python")
                 }
             }
         }
@@ -16,7 +16,9 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    docker.withRegistry('url del repositorio', 'credenciales')
+                    docker.withRegistry('https://878343933049.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:amazon')
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
                 }
             }
         }
