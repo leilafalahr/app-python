@@ -1,24 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('build'){
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sgalanceste/pipeline-1.git']]])
+                script {
+                    app = docker.build("python-app")
+                }
             }
         }
-        stage('Build') {
-            steps{
-                echo 'Buildings...'
-            } 
-        }
-        stage('Test') {
+        stage('test') {
             steps {
-                echo 'Testing...'
+                echo 'Empty'
             }
         }
-        stage('Deploy') {
+        stage('deploy') {
             steps {
-                echo 'Deploying...'
+                script {
+                    docker.withRegistry('url del repositorio', 'credenciales')
+                }
             }
         }
     }
